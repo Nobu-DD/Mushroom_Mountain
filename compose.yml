@@ -8,6 +8,5 @@ services:
       - ./.env.local
     volumes:
       - ./app:/app
-    command: yarn dev --host
     ports:
       - "3000:3000"

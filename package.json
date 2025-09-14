@@ -2,7 +2,9 @@
   "name": "Mushroom_Mountain",
   "version": "0.1.0",
   "dependencies": {
-    "react-scripts": "5.0.1"
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
   },
   "main": "index.js",
   "repository": "git@github.com:Nobu-DD/Mushroom_Mountain.git",
@@ -10,9 +12,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   }
 }
