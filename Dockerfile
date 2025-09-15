@@ -8,6 +8,8 @@ COPY package.json yarn.lock ./
 RUN yarn install
 # Dockerfileと同じ階層にある全てのディレクトリやファイルをコンテナ内にコピーする(app)
 COPY . .
+# node.jsを開発環境に指定
+ENV NODE_ENV=development
 # イメージのポート番号を指定する
 EXPOSE 3000
 CMD ["yarn", "run", "dev"]
