@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.13",
-    "next": "latest",
+    "next": "^15.5.3",
     "postcss": "^8.5.6",
-    "react": "latest",
+    "react": "^19.1.1",
     "react-calendar": "^6.0.0",
-    "react-dom": "latest",
+    "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.13"
   },
   "main": "index.js",
@@ -30,7 +30,7 @@
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.4.0",
     "jiti": "^2.5.1",
-    "typescript": "^5.9.2",
+    "typescript": "5.9.2",
     "typescript-eslint": "^8.43.0"
   }
 }
