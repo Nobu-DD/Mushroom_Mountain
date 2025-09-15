@@ -1,8 +1,15 @@
+import Image from 'next/image'
+
 export default function Page() {
   return (
-    <div>
-      <h1 className="text-2xl bg-pink-500 mb-5">Hello, Next.js!</h1>
-      <button className="btn btn-secondary">Secondary</button>
+    <div className="flex justify-center">
+      <Image
+        src="/mushroom.png"
+        alt="きのこ"
+        width={100}
+        height={100}
+      />
+      <h1 className="text-2xl mb-5">きのこの山岳</h1>
     </div>
   );
 }
