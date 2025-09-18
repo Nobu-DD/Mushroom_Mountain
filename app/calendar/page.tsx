@@ -1,8 +1,8 @@
-import Calendar from 'react-calendar'
-export default function Page() {
+import CalendarElement from './_components/CalendarElement';
+export default function CalendarPage() {
   return (
     <div>
-      <Calendar/>
+      <CalendarElement/>
     </div>
   );
 }
