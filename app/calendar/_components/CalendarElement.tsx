@@ -1,14 +1,17 @@
 'use client'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
-// import { useState } from 'react'
+import jaLocale from '@fullcalendar/core/locales/ja'
+import interactionPlugin from '@fullcalendar/interaction'
 
-// type dateElement = Date | null;
-// type dateInput = dateElement | [dateElement, dateElement];
+// let calendar = new Calendar(CalendarElement, {
+//   locale: jaLocale
+// });
 
 export default function CalendarElement() {
-  // const [date, dateChange] = useState<dateInput>(new Date());
-
+  const handleDateClick = (arg) => {
+    alert(arg.dateStr)
+  }
   return (
     <div>
       <div className="flex justify-center">
@@ -16,8 +19,11 @@ export default function CalendarElement() {
       </div>
       <div className="flex justify-center mt-15">
         <FullCalendar
-          plugins={[dayGridPlugin]}
+          plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
+          dateClick={handleDateClick}
+          locale={jaLocale}
+          selectable={true}
         />
       </div>
     </div>
