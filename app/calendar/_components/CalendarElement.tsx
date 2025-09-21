@@ -5,18 +5,17 @@ import jaLocale from '@fullcalendar/core/locales/ja'
 import interactionPlugin from '@fullcalendar/interaction'
 import MushroomModal from '@/app/calendar/_components/MushroomModal'
 import {useState} from "react";
+import LocalStorage from './LocalStorage'
 
 // let calendar = new Calendar(CalendarElement, {
 //   locale: jaLocale
 // });
 
 export default function CalendarElement() {
-  // const handleDateClick = (arg) => {
-  //   // モーダルで「きのこを繁殖させますか？」と確認用メッセージを表示させる
-
-  // }
-  // モーダルの表示、非表示を判定するReactHooks
   const [isOpenModal, setIsOpenModal] = useState(false);
+
+  // 一旦ここにローカルストレージから集めた情報を出力
+  console.log(LocalStorage.StorageGet)
 
   return (
     <div>

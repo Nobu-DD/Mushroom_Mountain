@@ -1,22 +1,17 @@
 'use client'
 import React, { useEffect, useRef } from "react"
 
-// モーダル関数の引数にisOpenModalとsetIsOpenModalを指定。TS特有の型定義を両方に設定する。
 export default function MushroomModal({ isOpenModal, setIsOpenModal }: { isOpenModal: boolean, setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>> }) {
-
-  // ------------------------------
-  // 外部クリック時にモーダルを閉じる処理
-  // ------------------------------
-  // モーダル外のhtml要素を取得しておく為のhooksを定義(htmlタグに指定するので、最初はnullにしておく)
   const modalRef = useRef(null);
-  // Propsを渡すことで起動する関数を定義(useEffect)isOpenModalの内容が変わるたび発動する
+  const mushroomButton = useRef(null);
+
   useEffect(() => {
-    // 画面外クリックでモーダルを閉じる処理が書かれている関数を定義(引数にeventを指定、MouseEventを型指定に)
     function handleClickOutside(event: MouseEvent) {
-      // modalRefに値が格納されている(モーダルが無ければnullのまま)
-      // かつ
-      // modalRefを参照し、html要素であることを明示。containsメソッドで
       if (modalRef.current && !(modalRef.current as HTMLElement).contains(event.target as Node)) {
+        setIsOpenModal(false);
+      } else if (mushroomButton.current && (mushroomButton.current as HTMLElement).contains(event.target as Node)) {
+        console.log("ボタンが押されたよ")
+        // ここの下部にカレンダースタンプを押すコンポーネントを指定
         setIsOpenModal(false);
       }
     };
@@ -31,12 +26,12 @@ export default function MushroomModal({ isOpenModal, setIsOpenModal }: { isOpenM
     <>
       {isOpenModal &&
         <div className="fixed z-10 top-0 left-0 w-full h-full bg-accent/50">
-          <div className="relative z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[95vh] md:max-h-[90vh] w-[80vw] md:w-[80vw] p-4 md:p-10 md:pb-20 bg-slate-100 border-2 border-neutral-950 shadow-lg rounded-xl overflow-auto" ref={modalRef}>
+          <div className="relative z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-[80vh] md:max-h-[75vh] w-[80vw] md:w-[80vw] p-4 md:p-10 bg-slate-100 border-2 border-neutral-950 shadow-lg rounded-xl overflow-auto" ref={modalRef}>
             <div className="flex justify-center">
               <h3 className="font-bold text-lg">今日も1日頑張りましたね</h3>
             </div>
-            <div className="flex justify-center">
-              <p className="py-4">きのこスタンプを押す</p>
+            <div className="flex justify-center mt-6">
+              <button className="btn" ref={mushroomButton}>きのこスタンプを押す</button>
             </div>
           </div>
         </div>
