@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useRef } from "react"
 
+// モーダル関数の引数にisOpenModalとsetIsOpenModalを指定。TS特有の型定義を両方に設定する。
 export default function MushroomModal({ isOpenModal, setIsOpenModal }: { isOpenModal: boolean, setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>> }) {
 
   // ------------------------------
@@ -8,20 +9,23 @@ export default function MushroomModal({ isOpenModal, setIsOpenModal }: { isOpenM
   // ------------------------------
   // モーダル外のhtml要素を取得しておく為のhooksを定義(htmlタグに指定するので、最初はnullにしておく)
   const modalRef = useRef(null);
-  // Propsを渡すことで起動する関数を定義(useEffect)
+  // Propsを渡すことで起動する関数を定義(useEffect)isOpenModalの内容が変わるたび発動する
   useEffect(() => {
-    // 画面外クリックでモーダルを閉じる処理が書かれている関数を定義(引数にMouseEventイベントを指定)
+    // 画面外クリックでモーダルを閉じる処理が書かれている関数を定義(引数にeventを指定、MouseEventを型指定に)
     function handleClickOutside(event: MouseEvent) {
-      // modalRefに値が格納されている(モーダルが無ければnullのまま) かつ modalRefにhtml要素が含まれている場合
+      // modalRefに値が格納されている(モーダルが無ければnullのまま)
+      // かつ
+      // modalRefを参照し、html要素であることを明示。containsメソッドで
       if (modalRef.current && !(modalRef.current as HTMLElement).contains(event.target as Node)) {
         setIsOpenModal(false);
       }
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
           document.removeEventListener("mousedown", handleClickOutside);
       };
-    };
-  }, [isOpenModal,setIsOpenModal]);
+  }, [isOpenModal, setIsOpenModal]);
 
   return (
     <>
