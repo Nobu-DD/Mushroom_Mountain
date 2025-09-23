@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html data-theme="retro" lang="ja" className={notoSansJapanese.className}>
-      <body className="">
+      <body>
         <Header />
         <main className="mt-20">{children}</main>
       </body>

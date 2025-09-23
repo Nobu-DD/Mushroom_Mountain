@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import jaLocale from '@fullcalendar/core/locales/ja'
 import interactionPlugin from '@fullcalendar/interaction'
 import MushroomModal from '@/app/calendar/_components/MushroomModal'
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import { StorageGet } from '@/utils/localStorage'
 
 // let calendar = new Calendar(CalendarElement, {
@@ -13,16 +13,19 @@ import { StorageGet } from '@/utils/localStorage'
 
 export default function CalendarElement() {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [calendarEvents, setCalendarEvents] = useState([]);
 
-  // 一旦ここにローカルストレージから集めた情報を保存
-  const stamps: { year: string, month: string, day: string }[] = StorageGet();
-  const calendarEvents = stamps.map(stamp => (
-    {
-      title: 'きのこスタンプ',
-      start: '${stamp.year}-${stamp.month}-${stamp.day}'
-    }
-  ));
-
+  // ブラウザにマウントされた後でのみ実行される
+  useEffect(() => {
+    const stamps: { year: string, month: string, day: string }[] = StorageGet();
+    const events = stamps.map(stamp => (
+      {
+        title: 'きのこスタンプ',
+        start: `${stamp.year}-${stamp.month}-${stamp.day}`,
+      }
+    ));
+    setCalendarEvents(events);
+  }, []);
 
   return (
     <div>
