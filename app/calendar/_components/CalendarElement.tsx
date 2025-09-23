@@ -14,8 +14,15 @@ import { StorageGet } from '@/utils/localStorage'
 export default function CalendarElement() {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-  // 一旦ここにローカルストレージから集めた情報を出力
-  console.log(StorageGet())
+  // 一旦ここにローカルストレージから集めた情報を保存
+  const stamps: { year: string, month: string, day: string }[] = StorageGet();
+  const calendarEvents = stamps.map(stamp => (
+    {
+      title: 'きのこスタンプ',
+      start: '${stamp.year}-${stamp.month}-${stamp.day}'
+    }
+  ));
+
 
   return (
     <div>
@@ -29,6 +36,7 @@ export default function CalendarElement() {
           contentHeight={700}
           dateClick={()=>setIsOpenModal(true)}
           locale={jaLocale}
+          events={calendarEvents}
           selectable={true}
           fixedWeekCount={false}
         />

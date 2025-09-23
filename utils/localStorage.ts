@@ -1,11 +1,12 @@
 export function StorageGet() {
   const stamps: { year: string, month: string, day: string }[] = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const keyName: string = localStorage.key(i);
+  const allStamps: Storage = localStorage
+  for (let i = 0; i < allStamps.length; i++) {
+    const keyName: string = allStamps.key(i);
     const regex: RegExp = /^mush/;
 
     if (regex.test(keyName)) {
-      const dataString: string = localStorage.getItem(keyName)
+      const dataString: string = allStamps.getItem(keyName)
       const stamp: { year: string, month: string, day: string } = JSON.parse(dataString)
       stamps.push(stamp)
     }
