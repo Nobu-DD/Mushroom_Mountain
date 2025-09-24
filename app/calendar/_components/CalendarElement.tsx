@@ -22,6 +22,8 @@ export default function CalendarElement() {
       {
         title: 'きのこスタンプ',
         start: `${stamp.year}-${stamp.month}-${stamp.day}`,
+        backgroundColor: 'transparent',
+        borderColor: 'transparent'
       }
     ));
     setCalendarEvents(events);
@@ -41,6 +43,11 @@ export default function CalendarElement() {
           locale={jaLocale}
           events={calendarEvents}
           selectable={true}
+          // ヒント：ここでイベントの見た目をカスタマイズします
+          eventContent={(arg) => (
+            // publicフォルダに置いた画像へのパスを指定します
+            <img src="/mushroom.png" alt={arg.event.title || 'きのこ'} className="p-1 w-full h-full object-contain" />
+          )}
           fixedWeekCount={false}
         />
       </div>
