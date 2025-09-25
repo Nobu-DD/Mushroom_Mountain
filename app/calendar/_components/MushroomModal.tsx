@@ -1,7 +1,9 @@
 'use client'
 import React, { useEffect, useRef } from "react"
+import { StorageAdd } from '@/utils/localStorage'
 
-export default function MushroomModal({ isOpenModal, setIsOpenModal }: { isOpenModal: boolean, setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>> }) {
+
+export default function MushroomModal({ isOpenModal, setIsOpenModal, selectedDate }: { isOpenModal: boolean, setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>, selectedDate: string | null }) {
   const modalRef = useRef(null);
   const mushroomButton = useRef(null);
 
@@ -10,8 +12,7 @@ export default function MushroomModal({ isOpenModal, setIsOpenModal }: { isOpenM
       if (modalRef.current && !(modalRef.current as HTMLElement).contains(event.target as Node)) {
         setIsOpenModal(false);
       } else if (mushroomButton.current && (mushroomButton.current as HTMLElement).contains(event.target as Node)) {
-        console.log("ボタンが押されたよ")
-        // ここの下部にカレンダースタンプを押すコンポーネントを指定
+        StorageAdd(selectedDate);
         setIsOpenModal(false);
       }
     };

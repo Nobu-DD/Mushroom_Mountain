@@ -7,15 +7,12 @@ import MushroomModal from '@/app/calendar/_components/MushroomModal'
 import {useState, useEffect} from "react";
 import { StorageGet } from '@/utils/localStorage'
 
-// let calendar = new Calendar(CalendarElement, {
-//   locale: jaLocale
-// });
-
 export default function CalendarElement() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
 
-  // ブラウザにマウントされた後でのみ実行される
+
   useEffect(() => {
     const stamps: { year: string, month: string, day: string }[] = StorageGet();
     const events = stamps.map(stamp => (
@@ -34,24 +31,30 @@ export default function CalendarElement() {
       <div className="flex justify-center">
         <h1 className="text-4xl">きのこ育成の記録</h1>
       </div>
-      <div className="mx-20 mt-15">
+      <div className="mx-20 mt-15 relative">
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
-          contentHeight={700}
-          dateClick={()=>setIsOpenModal(true)}
+          dateClick={(info) => {
+            setIsOpenModal(true)
+            setSelectedDate(info.dateStr)
+          }}
+          // eventClick={()}
           locale={jaLocale}
           events={calendarEvents}
           selectable={true}
-          // ヒント：ここでイベントの見た目をカスタマイズします
-          eventContent={(arg) => (
-            // publicフォルダに置いた画像へのパスを指定します
-            <img src="/mushroom.png" alt={arg.event.title || 'きのこ'} className="p-1 w-full h-full object-contain" />
+          eventContent={(eventInfo) => (
+            <img src="/mushroom.png" alt={eventInfo.event.title || 'きのこ'} className="" />
           )}
           fixedWeekCount={false}
+          dayMaxEvents={1}
         />
       </div>
-      <MushroomModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+      <MushroomModal
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+        selectedDate={selectedDate}
+      />
     </div>
   )
 }

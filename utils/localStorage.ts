@@ -12,4 +12,8 @@ export function StorageGet() {
     }
   }
   return stamps;
-  }
+}
+
+export function StorageAdd(date: string) {
+  console.log({ date })
+}
