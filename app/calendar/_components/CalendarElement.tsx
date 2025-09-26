@@ -7,24 +7,26 @@ import MushroomModal from '@/app/calendar/_components/MushroomModal'
 import {useState, useEffect} from "react";
 import { StorageGet } from '@/utils/localStorage'
 
+
 export default function CalendarElement() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState([]);
+  const [localDate, setLocalDate] = useState(localStorage.length);
   const [selectedDate, setSelectedDate] = useState(null);
 
 
   useEffect(() => {
-    const stamps: { year: string, month: string, day: string }[] = StorageGet();
+    const stamps: string [] = StorageGet();
     const events = stamps.map(stamp => (
       {
         title: 'きのこスタンプ',
-        start: `${stamp.year}-${stamp.month}-${stamp.day}`,
+        start: `${stamp}`,
         backgroundColor: 'transparent',
         borderColor: 'transparent'
       }
     ));
     setCalendarEvents(events);
-  }, []);
+  }, [localDate, setLocalDate]);
 
   return (
     <div>
